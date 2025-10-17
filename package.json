@@ -1,0 +1,23 @@
+{
+  "name": "cs-study",
+  "version": "1.0.0",
+  "description": "CS Study Documentation",
+  "type": "module",
+  "scripts": {
+    "generate-docs": "node scripts/generate-docs.js",
+    "dev": "yarn generate-docs && vite",
+    "build": "yarn generate-docs && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "marked": "^11.0.0",
+    "vite": "^5.0.0",
+    "vite-plugin-markdown": "^2.2.0"
+  },
+  "dependencies": {
+    "prismjs": "^1.29.0"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/SSAFYstudyAlgoPoolja/CS-Study.git",
+  "license": "MIT"
+}
