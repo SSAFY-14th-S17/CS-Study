@@ -23,5 +23,18 @@ export default defineConfig({
     port: 3000,
     host: true,
     open: false 
-  }
+  },
+  plugins: [
+    {
+      name: 'copy-docs',
+      closeBundle() {
+        try {
+          copyFileSync('docs.json', 'dist/docs.json');
+          console.log('Success! docs.json copied to dist/');
+        } catch (err) {
+          console.warn('docs.json not found, skipping copy');
+        }
+      }
+    }
+  ]
 });
