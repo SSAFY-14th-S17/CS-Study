@@ -6,7 +6,7 @@
   "scripts": {
     "generate-docs": "node scripts/generate-docs.js",
     "dev": "yarn generate-docs && vite",
-    "build": "yarn generate-docs && vite build",
+    "build": "vite build && node scripts/generate-docs.js dist/docs.json",
     "preview": "vite preview"
   },
   "devDependencies": {
