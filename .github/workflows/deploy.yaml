@@ -32,6 +32,15 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          NODE_ENV: production
+      
+      - name: Check build output
+        run: |
+          echo "Checking dist folder contents:"
+          ls -la dist/
+          echo "Checking index.html for base path:"
+          grep -n "cs-study" dist/index.html || echo "Base path not found in index.html!"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -49,7 +58,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-22.04
     needs: build
-    
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
