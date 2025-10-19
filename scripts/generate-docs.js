@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const DOCUMENT_DIR = path.join(__dirname, '../document');
-const OUTPUT_FILE = path.join(__dirname, '../docs.json');
+const OUTPUT_FILE = process.argv[2] || path.join(__dirname, '../docs.json');
 
 // 디렉토리를 재귀적으로 탐색하여 모든 .md 파일 찾기
 function findMarkdownFiles(dir, baseDir = dir, category = '') {
