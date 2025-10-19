@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production'
-    ? '/cs-study/'
+    ? '/CS-Study/'
     : '/',
   build: {
     outDir: 'dist',
