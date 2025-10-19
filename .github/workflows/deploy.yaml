@@ -28,7 +28,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Generate Docs
-        run: yanr generate-docs
+        run: yarn generate-docs
         
       - name: Build
         run: yarn build
