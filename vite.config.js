@@ -21,7 +21,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    host: true,  // Docker에서 외부 접근 가능하도록
-    open: false  // Docker 환경에서는 자동 열기 비활성화
+    host: true,
+    open: false 
   }
 });
