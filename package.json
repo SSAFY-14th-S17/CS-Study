@@ -15,7 +15,8 @@
     "vite-plugin-markdown": "^2.2.0"
   },
   "dependencies": {
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.29.0",
+    "yarn": "^1.22.22"
   },
   "main": "index.js",
   "repository": "https://github.com/SSAFY-14th-S17/CS-Study.git",

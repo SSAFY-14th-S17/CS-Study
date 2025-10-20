@@ -1,12 +1,12 @@
 // marked 라이브러리 import
-import { marked } from 'marked';
+import { marked } from "marked";
 
 // marked 설정
 marked.setOptions({
   breaks: true,
   gfm: true,
   headerIds: true,
-  mangle: false
+  mangle: false,
 });
 
 let docsData = {};
@@ -16,9 +16,9 @@ let currentDocPath = null;
 async function loadDocs() {
   try {
     // dist 폴더 내의 docs.json을 상대경로로 로드
-    const response = await fetch('./docs.json');
+    const response = await fetch("./docs.json");
     if (!response.ok) {
-      throw new Error('Failed to load docs.json');
+      throw new Error("Failed to load docs.json");
     }
     docsData = await response.json();
     renderNavigation();
@@ -32,44 +32,41 @@ async function loadDocs() {
       showWelcome();
     }
   } catch (error) {
-    console.error('Error loading docs:', error);
-    document.getElementById('navigation').innerHTML =
-        '<div class="loading">문서 목록을 불러올 수 없습니다.</div>';
+    console.error("Error loading docs:", error);
+    document.getElementById("navigation").innerHTML = '<div class="loading">문서 목록을 불러올 수 없습니다.</div>';
   }
 }
 
 // 네비게이션 렌더링
 function renderNavigation() {
-  const nav = document.getElementById('navigation');
-  nav.innerHTML = '';
+  const nav = document.getElementById("navigation");
+  nav.innerHTML = "";
 
   // 카테고리를 알파벳 순으로 정렬
-  const sortedCategories = Object.keys(docsData).sort((a, b) =>
-      a.localeCompare(b, 'ko')
-  );
+  const sortedCategories = Object.keys(docsData).sort((a, b) => a.localeCompare(b, "ko"));
 
-  sortedCategories.forEach(category => {
-    const categoryDiv = document.createElement('div');
-    categoryDiv.className = 'category';
+  sortedCategories.forEach((category) => {
+    const categoryDiv = document.createElement("div");
+    categoryDiv.className = "category";
 
-    const categoryTitle = document.createElement('div');
-    categoryTitle.className = 'category-title';
+    const categoryTitle = document.createElement("div");
+    categoryTitle.className = "category-title";
     categoryTitle.textContent = category;
 
-    categoryTitle.addEventListener('click', () => {
-      docList.style.display = docList.style.display === 'none' ? 'block' : 'none';
+    categoryTitle.addEventListener("click", () => {
+      docList.style.display = docList.style.display === "none" ? "block" : "none";
     });
 
-    const docList = document.createElement('ul');
-    docList.className = 'doc-list';
+    const docList = document.createElement("ul");
+    docList.className = "doc-list";
 
-    docsData[category].forEach(doc => {
-      const docItem = document.createElement('li');
-      docItem.className = 'doc-item';
+    docsData[category].forEach((doc) => {
+      const docItem = document.createElement("li");
+      docItem.className = "doc-item";
       docItem.textContent = doc.title;
       docItem.dataset.path = doc.path;
 
-      docItem.addEventListener('click', () => {
+      docItem.addEventListener("click", () => {
         loadDocument(doc.path);
       });
 
@@ -86,10 +83,10 @@ function renderNavigation() {
 async function loadDocument(docPath) {
   try {
     // 활성 상태 업데이트
-    document.querySelectorAll('.doc-item').forEach(item => {
-      item.classList.remove('active');
+    document.querySelectorAll(".doc-item").forEach((item) => {
+      item.classList.remove("active");
       if (item.dataset.path === docPath) {
-        item.classList.add('active');
+        item.classList.add("active");
       }
     });
 
@@ -98,12 +95,13 @@ async function loadDocument(docPath) {
     currentDocPath = docPath;
 
     // 경로 정규화 (앞의 슬래시 제거)
-    const normalizedPath = docPath.startsWith('/') ? docPath.slice(1) : docPath;
+    const normalizedPath = docPath.startsWith("/") ? docPath.slice(1) : docPath;
 
-    // dist -> 상위 폴더 -> document 폴더로 이동하는 상대경로
-    const relativePath = `../${normalizedPath}`;
+    // BASE_PATH 추가하여 실제 파일 경로 구성
+    const BASE_PATH = "CS-Study"; // 여기에 base path 정의
+    const relativePath = `../${BASE_PATH}/${normalizedPath}`;
 
-    console.log('Loading document from:', relativePath); // 디버깅용
+    console.log("Loading document from:", relativePath); // 디버깅용
 
     // 마크다운 파일 가져오기
     const response = await fetch(relativePath);
@@ -115,15 +113,14 @@ async function loadDocument(docPath) {
     const html = marked.parse(markdown);
 
     // 콘텐츠 영역에 렌더링
-    const content = document.getElementById('content');
+    const content = document.getElementById("content");
     content.innerHTML = html;
 
     // 페이지 상단으로 스크롤
     content.scrollTop = 0;
-
   } catch (error) {
-    console.error('Error loading document:', error);
-    const content = document.getElementById('content');
+    console.error("Error loading document:", error);
+    const content = document.getElementById("content");
     content.innerHTML = `
       <div style="padding: 2rem; text-align: center; color: #5c5962;">
         <h2>문서를 불러올 수 없습니다</h2>
@@ -138,7 +135,7 @@ async function loadDocument(docPath) {
 }
 
 function showWelcome() {
-  const content = document.getElementById('content');
+  const content = document.getElementById("content");
   content.innerHTML = `
     <div class="welcome">
       <h1>CS-Study</h1>
@@ -187,8 +184,8 @@ function showWelcome() {
   `;
 
   // 모든 문서 아이템의 활성 상태 제거
-  document.querySelectorAll('.doc-item').forEach(item => {
-    item.classList.remove('active');
+  document.querySelectorAll(".doc-item").forEach((item) => {
+    item.classList.remove("active");
   });
 
   // URL 해시 제거
@@ -196,7 +193,7 @@ function showWelcome() {
 }
 
 // 브라우저 뒤로가기/앞으로가기 지원
-window.addEventListener('hashchange', () => {
+window.addEventListener("hashchange", () => {
   const hash = window.location.hash.slice(1);
   if (hash) {
     const decodedPath = decodeURIComponent(hash);
