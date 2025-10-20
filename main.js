@@ -15,7 +15,7 @@ let currentDocPath = null;
 // docs.json 로드 및 네비게이션 렌더링
 async function loadDocs() {
   try {
-    const response = await fetch('/docs.json');
+    const response = await fetch('./docs.json');
     if (!response.ok) {
       throw new Error('Failed to load docs.json');
     }
