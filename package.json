@@ -18,6 +18,6 @@
     "prismjs": "^1.29.0"
   },
   "main": "index.js",
-  "repository": "https://github.com/SSAFYstudyAlgoPoolja/CS-Study.git",
+  "repository": "https://github.com/SSAFY-14th-S17/CS-Study.git",
   "license": "MIT"
 }
