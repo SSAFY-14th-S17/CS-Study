@@ -12,13 +12,11 @@ marked.setOptions({
 let docsData = {};
 let currentDocPath = null;
 
-// base URL 가져오기 (Vite 환경변수 사용)
-const BASE_URL = import.meta.env.BASE_URL || '/';
-
 // docs.json 로드 및 네비게이션 렌더링
 async function loadDocs() {
   try {
-    const response = await fetch(`${BASE_URL}docs.json`);
+    // dist 폴더 내의 docs.json을 상대경로로 로드
+    const response = await fetch('./docs.json');
     if (!response.ok) {
       throw new Error('Failed to load docs.json');
     }
@@ -102,13 +100,13 @@ async function loadDocument(docPath) {
     // 경로 정규화 (앞의 슬래시 제거)
     const normalizedPath = docPath.startsWith('/') ? docPath.slice(1) : docPath;
 
-    // base URL을 고려한 전체 경로 생성
-    const fullPath = `${BASE_URL}${normalizedPath}`;
+    // dist -> 상위 폴더 -> document 폴더로 이동하는 상대경로
+    const relativePath = `../${normalizedPath}`;
 
-    console.log('Loading document from:', fullPath); // 디버깅용
+    console.log('Loading document from:', relativePath); // 디버깅용
 
     // 마크다운 파일 가져오기
-    const response = await fetch(fullPath);
+    const response = await fetch(relativePath);
     if (!response.ok) {
       throw new Error(`Failed to load document: ${docPath} (${response.status})`);
     }
@@ -132,7 +130,7 @@ async function loadDocument(docPath) {
         <p>${error.message}</p>
         <p style="font-size: 0.9em; margin-top: 1rem;">
           요청 경로: ${docPath}<br>
-          Base URL: ${BASE_URL}
+          상대 경로: ../${normalizedPath}
         </p>
       </div>
     `;
