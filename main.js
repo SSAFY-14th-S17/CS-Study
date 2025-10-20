@@ -15,7 +15,7 @@ let currentDocPath = null;
 // docs.json 로드 및 네비게이션 렌더링
 async function loadDocs() {
   try {
-    const response = await fetch('/docs.json');
+    const response = await fetch('./docs.json');
     if (!response.ok) {
       throw new Error('Failed to load docs.json');
     }
@@ -143,32 +143,32 @@ function showWelcome() {
       <table style="text-align: center;">
         <thead>
           <tr>
-            <th style="text-align: center;><img src="https://github.com/KoalaJimin.png" width="100"></th>
-            <th style="text-align: center;><img src="https://github.com/9imDohee.png" width="100"></th>
-            <th style="text-align: center;><img src="https://github.com/Hyun00505.png" width="100"></th>
-            <th style="text-align: center;><img src="https://github.com/PNoahKR.png" width="100"></th>
-            <th style="text-align: center;><img src="https://github.com/youyeon11.png" width="100"></th>
-            <th style="text-align: center;><img src="https://github.com/mingeung.png" width="100"></th>
+            <th style="text-align: center;"><img src="https://github.com/KoalaJimin.png" width="100"></th>
+            <th style="text-align: center;"><img src="https://github.com/9imDohee.png" width="100"></th>
+            <th style="text-align: center;"><img src="https://github.com/Hyun00505.png" width="100"></th>
+            <th style="text-align: center;"><img src="https://github.com/PNoahKR.png" width="100"></th>
+            <th style="text-align: center;"><img src="https://github.com/youyeon11.png" width="100"></th>
+            <th style="text-align: center;"><img src="https://github.com/mingeung.png" width="100"></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="text-align: center;><a href="https://github.com/KoalaJimin">@KoalaJimin</a></td>
-            <td style="text-align: center;><a href="https://github.com/9imDohee">@9imDohee</a></td>
-            <td style="text-align: center;><a href="https://github.com/Hyun00505">@Hyun00505</a></td>
-            <td style="text-align: center;><a href="https://github.com/PNoahKR">@PNoahKR</a></td>
-            <td style="text-align: center;><a href="https://github.com/youyeon11">@youyeon11</a></td>
-            <td style="text-align: center;><a href="https://github.com/mingeung">@mingeung</a></td>
+            <td style="text-align: center;"><a href="https://github.com/KoalaJimin">@KoalaJimin</a></td>
+            <td style="text-align: center;"><a href="https://github.com/9imDohee">@9imDohee</a></td>
+            <td style="text-align: center;"><a href="https://github.com/Hyun00505">@Hyun00505</a></td>
+            <td style="text-align: center;"><a href="https://github.com/PNoahKR">@PNoahKR</a></td>
+            <td style="text-align: center;"><a href="https://github.com/youyeon11">@youyeon11</a></td>
+            <td style="text-align: center;"><a href="https://github.com/mingeung">@mingeung</a></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style="text-align: center;><a href="https://velog.io/@kgmline2/posts">Velog</a></td>
-            <td style="text-align: center;><a href="https://velog.io/@do_e/posts">Velog</a></td>
-            <td style="text-align: center;><a href="https://velog.io/@bunhine0452">Velog</a></td>
-            <td style="text-align: center;><a href="https://noah0818.tistory.com">Tistory</a></td>
-            <td style="text-align: center;><a href="https://kite-u.tistory.com">Tistory</a></td>
-            <td style="text-align: center;><a href="https://velog.io/@mingeung/posts">Velog</a></td>
+            <td style="text-align: center;"><a href="https://velog.io/@kgmline2/posts">Velog</a></td>
+            <td style="text-align: center;"><a href="https://velog.io/@do_e/posts">Velog</a></td>
+            <td style="text-align: center;"><a href="https://velog.io/@bunhine0452">Velog</a></td>
+            <td style="text-align: center;"><a href="https://noah0818.tistory.com">Tistory</a></td>
+            <td style="text-align: center;"><a href="https://kite-u.tistory.com">Tistory</a></td>
+            <td style="text-align: center;"><a href="https://velog.io/@mingeung/posts">Velog</a></td>
           </tr>
         </tbody>
       </table>
