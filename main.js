@@ -12,16 +12,19 @@ marked.setOptions({
 let docsData = {};
 let currentDocPath = null;
 
+// base URL 가져오기 (Vite 환경변수 사용)
+const BASE_URL = import.meta.env.BASE_URL || '/';
+
 // docs.json 로드 및 네비게이션 렌더링
 async function loadDocs() {
   try {
-    const response = await fetch('./docs.json');
+    const response = await fetch(`${BASE_URL}docs.json`);
     if (!response.ok) {
       throw new Error('Failed to load docs.json');
     }
     docsData = await response.json();
     renderNavigation();
-    
+
     // URL 해시가 있으면 해당 문서 로드
     const hash = window.location.hash.slice(1);
     if (hash) {
@@ -32,8 +35,8 @@ async function loadDocs() {
     }
   } catch (error) {
     console.error('Error loading docs:', error);
-    document.getElementById('navigation').innerHTML = 
-      '<div class="loading">문서 목록을 불러올 수 없습니다.</div>';
+    document.getElementById('navigation').innerHTML =
+        '<div class="loading">문서 목록을 불러올 수 없습니다.</div>';
   }
 }
 
@@ -41,41 +44,40 @@ async function loadDocs() {
 function renderNavigation() {
   const nav = document.getElementById('navigation');
   nav.innerHTML = '';
-  
+
   // 카테고리를 알파벳 순으로 정렬
-  const sortedCategories = Object.keys(docsData).sort((a, b) => 
-    a.localeCompare(b, 'ko')
+  const sortedCategories = Object.keys(docsData).sort((a, b) =>
+      a.localeCompare(b, 'ko')
   );
-  
+
   sortedCategories.forEach(category => {
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'category';
-    
+
     const categoryTitle = document.createElement('div');
     categoryTitle.className = 'category-title';
     categoryTitle.textContent = category;
-    
-    // 카테고리 토글 기능 (선택사항)
+
     categoryTitle.addEventListener('click', () => {
       docList.style.display = docList.style.display === 'none' ? 'block' : 'none';
     });
-    
+
     const docList = document.createElement('ul');
     docList.className = 'doc-list';
-    
+
     docsData[category].forEach(doc => {
       const docItem = document.createElement('li');
       docItem.className = 'doc-item';
       docItem.textContent = doc.title;
       docItem.dataset.path = doc.path;
-      
+
       docItem.addEventListener('click', () => {
         loadDocument(doc.path);
       });
-      
+
       docList.appendChild(docItem);
     });
-    
+
     categoryDiv.appendChild(categoryTitle);
     categoryDiv.appendChild(docList);
     nav.appendChild(categoryDiv);
@@ -92,27 +94,35 @@ async function loadDocument(docPath) {
         item.classList.add('active');
       }
     });
-    
+
     // URL 해시 업데이트
     window.location.hash = encodeURIComponent(docPath);
     currentDocPath = docPath;
-    
+
+    // 경로 정규화 (앞의 슬래시 제거)
+    const normalizedPath = docPath.startsWith('/') ? docPath.slice(1) : docPath;
+
+    // base URL을 고려한 전체 경로 생성
+    const fullPath = `${BASE_URL}${normalizedPath}`;
+
+    console.log('Loading document from:', fullPath); // 디버깅용
+
     // 마크다운 파일 가져오기
-    const response = await fetch(`/${docPath}`);
+    const response = await fetch(fullPath);
     if (!response.ok) {
-      throw new Error(`Failed to load document: ${docPath}`);
+      throw new Error(`Failed to load document: ${docPath} (${response.status})`);
     }
-    
+
     const markdown = await response.text();
     const html = marked.parse(markdown);
-    
+
     // 콘텐츠 영역에 렌더링
     const content = document.getElementById('content');
     content.innerHTML = html;
-    
+
     // 페이지 상단으로 스크롤
     content.scrollTop = 0;
-    
+
   } catch (error) {
     console.error('Error loading document:', error);
     const content = document.getElementById('content');
@@ -120,12 +130,15 @@ async function loadDocument(docPath) {
       <div style="padding: 2rem; text-align: center; color: #5c5962;">
         <h2>문서를 불러올 수 없습니다</h2>
         <p>${error.message}</p>
+        <p style="font-size: 0.9em; margin-top: 1rem;">
+          요청 경로: ${docPath}<br>
+          Base URL: ${BASE_URL}
+        </p>
       </div>
     `;
   }
 }
 
-// 환영 메시지 표시 함수
 function showWelcome() {
   const content = document.getElementById('content');
   content.innerHTML = `
@@ -174,12 +187,12 @@ function showWelcome() {
       </table>
     </div>
   `;
-  
+
   // 모든 문서 아이템의 활성 상태 제거
   document.querySelectorAll('.doc-item').forEach(item => {
     item.classList.remove('active');
   });
-  
+
   // URL 해시 제거
   history.pushState(null, null, window.location.pathname);
 }
