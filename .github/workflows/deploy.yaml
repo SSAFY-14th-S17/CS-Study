@@ -26,20 +26,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'yarn'
+          node-version: "20"
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Generate Docs
         run: yarn generate-docs
-        
+
       - name: Build
         run: yarn build
         env:
           NODE_ENV: production
-      
+
+      - name: Copy document folder to dist
+        run: cp -r document dist/
+
       - name: Check build output
         run: |
           echo "Checking dist folder contents:"
@@ -55,7 +58,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: "./dist"
 
   deploy:
     environment:
