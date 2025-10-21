@@ -110,7 +110,12 @@ async function loadDocument(docPath) {
     }
 
     const markdown = await response.text();
-    const html = marked.parse(markdown);
+
+    // 이미지 경로에 base URL 추가
+    const baseUrl = "/CS-Study";
+    const updatedMarkdown = markdown.replace(/!\[([^\]]*)\]\(\/document\//g, `![$1](${baseUrl}/document/`);
+
+    const html = marked.parse(updatedMarkdown);
 
     // 콘텐츠 영역에 렌더링
     const content = document.getElementById("content");
