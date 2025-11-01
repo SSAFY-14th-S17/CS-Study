@@ -31,8 +31,7 @@ function findMarkdownFiles(dir, baseDir = dir, category = '') {
       // .md 파일 발견
       const relativePath = path.relative(path.join(__dirname, '..'), filePath);
       const title = path.basename(file, '.md')
-        .replace(/_/g, '/')  // 언더스코어를 슬래시로 변환 (B-Tree_B+Tree -> B-Tree/B+Tree)
-        .replace(/-/g, ' ');  // 하이픈을 공백으로 변환
+        .replace(/_/g, ' ');
       
       results.push({
         category: category,
