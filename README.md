@@ -1,16 +1,31 @@
 # CS-Study
 
+## Contents
 
+### network
+
+* [README.md](/document/network/README.md)
+
+### operating-system
+
+* [Context_switching.md](/document/operating-system/Context_swithcing.md)
+* [CPU_scheduling.md](/document/operating-system/CPU_scheduling.md)
+* [File_System.md](/document/operating-system/File_System.md)
+* [IPC.md](/document/operating-system/IPC.md)
+* [Mutex&Semaphore.md](/document/operating-system/Mutex&Semaphore.md)
+* [PCB(Process_Control_Block).md](/document/operating-system/PCB%28Process_Control_Block%29.md)
+* [Process_state_transition.md](/document/operating-system/Process_state_transition.md)
+* [Race_Condition.md](/document/operating-system/Race_Condition.md)
+
+<br>
 
 ## About
 
 > 2025.09.01 ~ ing
 
 - 알고리즘과 CS 기초 지식의 이론부터 구현까지, 예비 개발자로서 알아야 할 필수 지식들을 공부하고 기록한 저장소입니다.
-- 매주 스터디한 흔적인 **발표 자료**들이 업로드되어 있으며, 더 나아가 **글**로, **질의응답** 형태로 문서화하는 것을 목표로 합니다.
-- 자동 문서 인식: document/ 폴더에 .md 파일을 추가하면 자동으로 웹사이트에 반영됩니다
-- 카테고리 자동 분류: 폴더 구조에 따라 자동으로 카테고리가 생성됩니다
-- 자동 배포: GitHub Actions를 통한 자동 빌드 및 배포
+- 매주 스터디한 흔적인 **발표 자료**들이 업로드되어 있으며, 더 나아가 **글**로 문서화하는 것을 목표로 하고 있습니다.
+- 자동 문서 인식: document/ 폴더에 .md 파일을 추가하면 자동으로 웹사이트에 반영됩니다( GitHub Actions를 통한 자동 빌드 및 배포 )
 
 
 ### Project Structure
@@ -20,11 +35,6 @@ cs-study/
 │   └── workflows/
 │       └── deploy.yml          # GitHub Actions workflows
 ├── document/                   # document
-│   ├── network/
-│   │   ├── TCP_UDP.md
-│   │   ├── VPC.md
-│   │   └── ...
-│   └── operating-system/
 ├── scripts/
 │   └── generate-docs.js        # 문서 자동 스캔 스크립트
 ├── index.html                  # Main page
@@ -70,9 +80,9 @@ cs-study/
 ### Build and Deploy
 ```bash
 yarn install
+yarn generate-docs
 yarn dev
 yarn build
-yarn generate-docs
 ```
 
 
