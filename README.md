@@ -16,6 +16,7 @@
 * [PCB(Process_Control_Block).md](/document/operating-system/PCB%28Process_Control_Block%29.md)
 * [Process_state_transition.md](/document/operating-system/Process_state_transition.md)
 * [Race_Condition.md](/document/operating-system/Race_Condition.md)
+* [Segmentation.md](/document/operating-system/Segmentation.md)
 
 <br>
 
