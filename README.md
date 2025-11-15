@@ -18,6 +18,17 @@
 * [Race_Condition.md](/document/operating-system/Race_Condition.md)
 * [Segmentation.md](/document/operating-system/Segmentation.md)
 
+### database
+
+* [db_basic.md](/document/operating-system/DatabasesBasics.md)
+* [erd.md](/document/operating-system/erd.md)
+* [join.md](/document/operating-system/join.md)
+* [key.md](/document/operating-system/KEY.md)
+* [Anomaly.md](/document/operating-system/Anomaly.md)
+* [ORM.md](/document/operating-system/ORM.md)
+* [duplication.md](/document/operating-system/Duplication.md)
+
+
 <br>
 
 ## About
